@@ -1,0 +1,23 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://d27fhxq7nr0ns"]
+
+[ext_resource type="FontFile" uid="uid://birahchd74q28" path="res://assets/fonts/saira/SairaBlack.ttf" id="1_24q3n"]
+[ext_resource type="FontFile" uid="uid://b284ty7suqywp" path="res://assets/fonts/saira/SairaExtraLight.ttf" id="1_vmmo2"]
+[ext_resource type="StyleBox" uid="uid://24my0kdfwlbc" path="res://button_normal.tres" id="2_t1uk1"]
+[ext_resource type="FontFile" uid="uid://c1b0uofbk6i13" path="res://assets/fonts/saira/SairaRegular.ttf" id="4_oblph"]
+[ext_resource type="StyleBox" uid="uid://ceidgr3gcc5ih" path="res://line_edit_normal.tres" id="5_oblph"]
+
+[resource]
+Button/colors/icon_focus_color = Color(0.2, 0.2, 0.2, 1)
+Button/colors/icon_hover_color = Color(0.2, 0.2, 0.2, 1)
+Button/colors/icon_hover_pressed_color = Color(0.2, 0.2, 0.2, 1)
+Button/colors/icon_normal_color = Color(0.2, 0.2, 0.2, 1)
+Button/colors/icon_pressed_color = Color(0.2, 0.2, 0.2, 1)
+Button/font_sizes/font_size = 64
+Button/fonts/font = ExtResource("1_vmmo2")
+Button/styles/normal = ExtResource("2_t1uk1")
+Label/font_sizes/font_size = 128
+Label/fonts/font = ExtResource("1_24q3n")
+LineEdit/font_sizes/font_size = 48
+LineEdit/fonts/font = ExtResource("4_oblph")
+LineEdit/styles/normal = ExtResource("5_oblph")
+VBoxContainer/constants/separation = 60

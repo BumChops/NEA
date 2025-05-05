@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu1ae01rxtlgm"]
+
+[ext_resource type="Script" uid="uid://btvhqaqqkotls" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Theme" path="res://main.tres" id="1_ig7tw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 0.462745, 0.321569, 1)
+corner_radius_top_left = 50
+corner_radius_bottom_right = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 0.796078, 0.309804, 1)
+corner_radius_top_left = 50
+corner_radius_bottom_right = 50
+
+[node name="Main" type="Node"]
+script = ExtResource("1_0xm2m")
+
+[node name="MainUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 640.0
+offset_right = -640.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ig7tw")
+alignment = 1
+
+[node name="Title" type="Label" parent="MainUI/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ig7tw")
+text = "Solarae"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameEntry" type="LineEdit" parent="MainUI/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ig7tw")
+placeholder_text = "Enter your username..."
+max_length = 32
+
+[node name="HostButton" type="Button" parent="MainUI/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ig7tw")
+theme_override_colors/font_color = Color(1, 0.462745, 0.321569, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_0xm2m")
+text = "Host a game"
+
+[node name="CodeEntry" type="LineEdit" parent="MainUI/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ig7tw")
+placeholder_text = "Enter the join code..."
+max_length = 8
+
+[node name="JoinButton" type="Button" parent="MainUI/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ig7tw")
+theme_override_colors/font_color = Color(1, 0.796078, 0.309804, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_h2yge")
+text = "Join a game"
+
+[connection signal="text_changed" from="MainUI/VBoxContainer/NameEntry" to="." method="_on_name_entry_text_changed"]
+[connection signal="pressed" from="MainUI/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="text_changed" from="MainUI/VBoxContainer/CodeEntry" to="." method="_on_code_entry_text_changed"]
+[connection signal="pressed" from="MainUI/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
