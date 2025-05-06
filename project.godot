@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="NEA"
+config/name="Solarae"
 run/main_scene="uid://cu1ae01rxtlgm"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 

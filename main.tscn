@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cu1ae01rxtlgm"]
 
 [ext_resource type="Script" uid="uid://btvhqaqqkotls" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="Theme" path="res://main.tres" id="1_ig7tw"]
+[ext_resource type="Theme" uid="uid://dcc3ctxvwy8y2" path="res://main.tres" id="1_ig7tw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -9,7 +9,7 @@ border_width_left = 10
 border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
-border_color = Color(1, 0.462745, 0.321569, 1)
+border_color = Color(0.752941, 0.25098, 0.313726, 1)
 corner_radius_top_left = 50
 corner_radius_bottom_right = 50
 
@@ -19,7 +19,7 @@ border_width_left = 10
 border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
-border_color = Color(1, 0.796078, 0.309804, 1)
+border_color = Color(0.752941, 0.564706, 0.25098, 1)
 corner_radius_top_left = 50
 corner_radius_bottom_right = 50
 
@@ -68,21 +68,29 @@ max_length = 32
 [node name="HostButton" type="Button" parent="MainUI/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_ig7tw")
-theme_override_colors/font_color = Color(1, 0.462745, 0.321569, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.752941, 0.25098, 0.313726, 1)
+theme_override_colors/font_hover_color = Color(0.752941, 0.25098, 0.313726, 1)
+theme_override_colors/font_color = Color(0.752941, 0.25098, 0.313726, 1)
+theme_override_colors/font_focus_color = Color(0.752941, 0.25098, 0.313726, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_0xm2m")
+disabled = true
 text = "Host a game"
 
 [node name="CodeEntry" type="LineEdit" parent="MainUI/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_ig7tw")
 placeholder_text = "Enter the join code..."
-max_length = 8
+max_length = 7
 
 [node name="JoinButton" type="Button" parent="MainUI/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_ig7tw")
-theme_override_colors/font_color = Color(1, 0.796078, 0.309804, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.752941, 0.564706, 0.25098, 1)
+theme_override_colors/font_hover_color = Color(0.752941, 0.564706, 0.25098, 1)
+theme_override_colors/font_color = Color(0.752941, 0.564706, 0.25098, 1)
+theme_override_colors/font_focus_color = Color(0.752941, 0.564706, 0.25098, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_h2yge")
+disabled = true
 text = "Join a game"
 
 [connection signal="text_changed" from="MainUI/VBoxContainer/NameEntry" to="." method="_on_name_entry_text_changed"]
