@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cu1ae01rxtlgm"]
+[gd_scene load_steps=8 format=3 uid="uid://cu1ae01rxtlgm"]
 
 [ext_resource type="Script" uid="uid://btvhqaqqkotls" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Theme" uid="uid://dcc3ctxvwy8y2" path="res://main.tres" id="1_ig7tw"]
 [ext_resource type="FontFile" uid="uid://birahchd74q28" path="res://assets/fonts/saira/SairaBlack.ttf" id="3_h2yge"]
+[ext_resource type="FontFile" uid="uid://b284ty7suqywp" path="res://assets/fonts/saira/SairaExtraLight.ttf" id="4_1bvp3"]
+[ext_resource type="FontFile" uid="uid://dhswkr4fy3pf5" path="res://assets/fonts/saira/SairaSemiBold.ttf" id="5_lquwl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -28,7 +30,6 @@ corner_radius_bottom_right = 50
 script = ExtResource("1_0xm2m")
 
 [node name="MainUI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -98,6 +99,7 @@ disabled = true
 text = "Join a game"
 
 [node name="HostLobbyUI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -130,13 +132,20 @@ alignment = 1
 [node name="LobbyCode" type="Label" parent="HostLobbyUI/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_ig7tw")
-text = "The lobby code is: A7ZY4KL"
+theme_override_fonts/font = ExtResource("4_1bvp3")
+text = "Lobby code is: ???"
+horizontal_alignment = 1
+
+[node name="NameDisplay" type="Label" parent="HostLobbyUI/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ig7tw")
+theme_override_fonts/font = ExtResource("5_lquwl")
+text = "No other player connected"
 horizontal_alignment = 1
 
 [node name="CopyCodeButton" type="Button" parent="HostLobbyUI/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_ig7tw")
-disabled = true
 text = "Copy join code"
 
 [node name="KickButton" type="Button" parent="HostLobbyUI/VBoxContainer"]
@@ -156,3 +165,5 @@ text = "Start the game"
 [connection signal="pressed" from="MainUI/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="text_changed" from="MainUI/VBoxContainer/CodeEntry" to="." method="_on_code_entry_text_changed"]
 [connection signal="pressed" from="MainUI/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="HostLobbyUI/VBoxContainer/CopyCodeButton" to="." method="_on_copy_code_button_pressed"]
+[connection signal="pressed" from="HostLobbyUI/VBoxContainer/KickButton" to="." method="_on_kick_button_pressed"]
