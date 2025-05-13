@@ -12,6 +12,7 @@ var tcpServer = null
 
 var clientUp = false
 var serverUp = false
+var stage = ""
 
 #const base34Chars = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ"
 
@@ -65,14 +66,20 @@ func manageServer():
 		
 		if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
 			while socket.get_available_packet_count() != 0:
-				print(socket.get_packet().get_string_from_ascii())
+				print(username + ": " + socket.get_packet().get_string_from_ascii())
 		
 	elif clientUp:
 		socket.poll()
-
 		if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
 			while socket.get_available_packet_count():
-				print(socket.get_packet().get_string_from_ascii())
+				print(username + ": " + socket.get_packet().get_string_from_ascii())
+			
+			if stage == "CONFIRM CONNECTION":
+				print(username + ": test")
+				socket.send_text(username)
+				stage = "LOBBY WAITING"
+
+
 
 func _on_name_entry_text_changed(newName):
 	username = newName
@@ -93,10 +100,11 @@ func _on_host_button_pressed():
 		serverUp = true
 
 func _on_join_button_pressed():
-	if socket.connect_to_url("ws://localhost:9080") != OK: #Replace with join code
+	if socket.connect_to_url("ws://localhost:9080") != OK: #Replace with join code!
 		print("Cannot connect!")
 	else:
 		print("Client connected!")
+		stage = "CONFIRM CONNECTION"
 		clientUp = true
 
 func _on_copy_code_button_pressed():
