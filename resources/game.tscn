@@ -206,3 +206,8 @@ position = Vector2(880, 0)
 [node name="H1" type="Sprite2D" parent="OpCardTiles/Hand"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6xdbb")
+
+[node name="CardReader" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_6xdbb")
