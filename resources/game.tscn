@@ -1,0 +1,208 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmvyebcwv8qiq"]
+
+[ext_resource type="Script" uid="uid://85o2t7mrqs3u" path="res://resources/game.gd" id="1_xyldu"]
+[ext_resource type="Texture2D" uid="uid://rrqs5stht84t" path="res://assets/images/test_card.svg" id="2_6xdbb"]
+[ext_resource type="Texture2D" uid="uid://bh448pmqegkik" path="res://assets/images/backdrop.svg" id="2_nb8ie"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_xyldu")
+
+[node name="Backdrop" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("2_nb8ie")
+
+[node name="PlayerCardTiles" type="Node2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="V1" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-280, -270)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="V2" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-280, -90)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="V3" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-280, 90)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="V4" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-280, 270)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="R1" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-480, -270)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="R2" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-480, -90)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="R3" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-480, 90)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="R4" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-480, 270)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="E1" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-680, -450)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="E2" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-680, -270)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="E3" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-680, -90)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="E4" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-680, 90)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="E5" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-680, 270)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="E6" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-680, 450)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="Boneyard" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-480, 450)
+rotation = 1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="Reserve" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-480, -450)
+rotation = 1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="CapitalReserve" type="Sprite2D" parent="PlayerCardTiles"]
+position = Vector2(-280, -450)
+rotation = 1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="Hand" type="Node2D" parent="PlayerCardTiles"]
+position = Vector2(-880, 0)
+
+[node name="H1" type="Sprite2D" parent="PlayerCardTiles/Hand"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="OpCardTiles" type="Node2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="V1" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(280, -270)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="V2" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(280, -90)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="V3" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(280, 90)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="V4" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(280, 270)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="R1" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(480, -270)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="R2" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(480, -90)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="R3" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(480, 90)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="R4" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(480, 270)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="E1" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(680, -450)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="E2" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(680, -270)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="E3" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(680, -90)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="E4" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(680, 90)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="E5" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(680, 270)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="E6" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(680, 450)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")
+
+[node name="Boneyard" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(480, 450)
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="Reserve" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(480, -450)
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="CapitalReserve" type="Sprite2D" parent="OpCardTiles"]
+position = Vector2(280, -450)
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6xdbb")
+
+[node name="Hand" type="Node2D" parent="OpCardTiles"]
+position = Vector2(880, 0)
+
+[node name="H1" type="Sprite2D" parent="OpCardTiles/Hand"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6xdbb")

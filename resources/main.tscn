@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cu1ae01rxtlgm"]
+[gd_scene load_steps=9 format=3 uid="uid://cu1ae01rxtlgm"]
 
 [ext_resource type="Script" uid="uid://btvhqaqqkotls" path="res://resources/main.gd" id="1_0xm2m"]
 [ext_resource type="Theme" uid="uid://dcc3ctxvwy8y2" path="res://resources/main.tres" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://bh448pmqegkik" path="res://assets/images/backdrop.svg" id="2_rfrky"]
 [ext_resource type="FontFile" uid="uid://birahchd74q28" path="res://assets/fonts/saira/SairaBlack.ttf" id="3_h2yge"]
 [ext_resource type="FontFile" uid="uid://b284ty7suqywp" path="res://assets/fonts/saira/SairaExtraLight.ttf" id="4_1bvp3"]
 [ext_resource type="FontFile" uid="uid://dhswkr4fy3pf5" path="res://assets/fonts/saira/SairaSemiBold.ttf" id="5_lquwl"]
@@ -28,6 +29,10 @@ corner_radius_bottom_right = 50
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
+
+[node name="Backdrop" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("2_rfrky")
 
 [node name="MainUI" type="Control" parent="."]
 layout_mode = 3
