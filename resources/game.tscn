@@ -237,7 +237,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_nqg2l")
 theme_override_fonts/font = ExtResource("5_p71tq")
-text = "100"
+text = "🟅100🟅"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -256,6 +256,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_nqg2l")
 theme_override_fonts/font = ExtResource("5_p71tq")
-text = "100"
+text = "🟅100🟅"
 horizontal_alignment = 1
 vertical_alignment = 1
