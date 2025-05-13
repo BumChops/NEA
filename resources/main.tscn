@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cu1ae01rxtlgm"]
 
-[ext_resource type="Script" uid="uid://btvhqaqqkotls" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="Theme" uid="uid://dcc3ctxvwy8y2" path="res://main.tres" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://btvhqaqqkotls" path="res://resources/main.gd" id="1_0xm2m"]
+[ext_resource type="Theme" uid="uid://dcc3ctxvwy8y2" path="res://resources/main.tres" id="1_ig7tw"]
 [ext_resource type="FontFile" uid="uid://birahchd74q28" path="res://assets/fonts/saira/SairaBlack.ttf" id="3_h2yge"]
 [ext_resource type="FontFile" uid="uid://b284ty7suqywp" path="res://assets/fonts/saira/SairaExtraLight.ttf" id="4_1bvp3"]
 [ext_resource type="FontFile" uid="uid://dhswkr4fy3pf5" path="res://assets/fonts/saira/SairaSemiBold.ttf" id="5_lquwl"]

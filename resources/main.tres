@@ -1,12 +1,12 @@
 [gd_resource type="Theme" load_steps=10 format=3 uid="uid://dcc3ctxvwy8y2"]
 
 [ext_resource type="FontFile" uid="uid://b284ty7suqywp" path="res://assets/fonts/saira/SairaExtraLight.ttf" id="1_vmmo2"]
-[ext_resource type="StyleBox" path="res://button_normal.tres" id="2_t1uk1"]
-[ext_resource type="StyleBox" uid="uid://xmivwjqkccbf" path="res://button_disabled.tres" id="2_v11j8"]
-[ext_resource type="StyleBox" uid="uid://cjrg4f1bu2i5" path="res://button_hover.tres" id="3_5i7ek"]
+[ext_resource type="StyleBox" uid="uid://24my0kdfwlbc" path="res://resources/style_boxes/button_normal.tres" id="2_t1uk1"]
+[ext_resource type="StyleBox" uid="uid://xmivwjqkccbf" path="res://resources/style_boxes/button_disabled.tres" id="2_v11j8"]
+[ext_resource type="StyleBox" uid="uid://cjrg4f1bu2i5" path="res://resources/style_boxes/button_hover.tres" id="3_5i7ek"]
 [ext_resource type="FontFile" uid="uid://c1b0uofbk6i13" path="res://assets/fonts/saira/SairaRegular.ttf" id="4_oblph"]
-[ext_resource type="StyleBox" uid="uid://cso0xprsbvbsb" path="res://button_pressed.tres" id="5_5i7ek"]
-[ext_resource type="StyleBox" uid="uid://crkhh48llp2lc" path="res://line_edit_normal.tres" id="5_oblph"]
+[ext_resource type="StyleBox" uid="uid://cso0xprsbvbsb" path="res://resources/style_boxes/button_pressed.tres" id="5_5i7ek"]
+[ext_resource type="StyleBox" uid="uid://crkhh48llp2lc" path="res://resources/style_boxes/line_edit_normal.tres" id="5_oblph"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uxqhr"]
 
