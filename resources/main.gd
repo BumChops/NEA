@@ -1,5 +1,7 @@
 extends Node
 
+@onready var game = preload("res://resources/game.tscn")
+
 @onready var hostLobbyUI = $HostLobbyUI
 @onready var joinLobbyUI = $JoinLobbyUI
 @onready var mainUI = $MainUI
@@ -30,6 +32,13 @@ var joinCode = ""
 var hostCode = ""
 var username = ""
 var opName = ""
+
+var myDeck = []
+const tempDeck = "1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4"
+var turn = 0
+
+func output(data) -> void:
+	print(username + ": " + data)
 
 func _ready():
 	var http = HTTPRequest.new()
@@ -76,39 +85,58 @@ func manageServer():
 		if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
 			while socket.get_available_packet_count() != 0:
 				packets.append(socket.get_packet().get_string_from_ascii())
-				print(username + ": " + packets[-1])
-				var packet = packets[-1].split(" ", true, 1)
+				output(packets[-1])
+				var packet = packets.pop_back().split(" ", true, 1)
 				match packet[0]:
 					"CONNECTED":
 						opName = packet[1]
 						hostNameDisplay.text = "You are in a lobby with: " + opName
-						print(username + ": " + packet[1])
+						output(packet[1])
 						socket.send_text("CONNECTED " + username)
 						stage = "LOBBY WAITING"
+					"DECK_SET":
+						socket.send_text("STARTING")
+						stage = "STARTING"
 			
 			match stage:
 				"LOBBY WAITING":
 					kickButton.disabled = false
 					startButton.disabled = false
+				"STARTING":
+					hostLobbyUI.hide()
+					var gameInstance = game.instantiate()
+					add_child(gameInstance)
 		
 	elif clientUp:
 		socket.poll()
 		if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
 			while socket.get_available_packet_count() != 0:
 				packets.append(socket.get_packet().get_string_from_ascii())
-				print(username + ": " + packets[-1])
-				var packet = packets[-1].split(" ", true, 1)
+				output(packets[-1])
+				var packet = packets.pop_back().split(" ", true, 1)
 				match packet[0]:
 					"CONNECTED":
 						opName = packet[1]
 						joinNameDisplay.text = "You are in a lobby with: " + opName
 						stage = "LOBBY WAITING"
-					"KICKED":
-						print("You have been kicked :(")
+					"FORCE_DECK":
+						myDeck = packet[1].split(",")
+						socket.send_text("DECK_SET")
+						stage = "LOBBY WAITING"
+					"KICKING":
+						output("You have been kicked :(")
 						joinNameDisplay.text = "You have been kicked 😟"
+						stage = "KICKED"
+					"STARTING":
+						joinLobbyUI.hide()
+						var gameInstance = game.instantiate()
+						add_child(gameInstance)
+						socket.send_text("STARTED")
+						stage = "STARTED"
+			
 			match stage:
 				"CONFIRM CONNECTION":
-					print(username + ": test")
+					output("test")
 					socket.send_text("CONNECTED " + username)
 					stage = "NEED PACKET"
 
@@ -146,9 +174,13 @@ func _on_copy_code_button_pressed():
 	DisplayServer.clipboard_set(hostCode)
 
 func _on_kick_button_pressed():
-	socket.send_text("KICKED")
+	socket.send_text("KICKING")
 	await get_tree().create_timer(0.5).timeout
 	socket.close()
 
 func _on_leave_button_pressed():
 	socket.close()
+
+func _on_start_button_pressed():
+	socket.send_text("FORCE_DECK " + tempDeck)
+	myDeck = tempDeck.split(",")

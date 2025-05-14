@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cu1ae01rxtlgm"]
+[gd_scene load_steps=10 format=3 uid="uid://cu1ae01rxtlgm"]
 
 [ext_resource type="Script" uid="uid://btvhqaqqkotls" path="res://resources/main.gd" id="1_0xm2m"]
 [ext_resource type="Theme" uid="uid://dcc3ctxvwy8y2" path="res://resources/main.tres" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bx050dyx1g11w" path="res://resources/card_data_storage.gd" id="2_52idc"]
 [ext_resource type="Texture2D" uid="uid://bh448pmqegkik" path="res://assets/images/backdrop.svg" id="2_rfrky"]
 [ext_resource type="FontFile" uid="uid://birahchd74q28" path="res://assets/fonts/saira/SairaBlack.ttf" id="3_h2yge"]
 [ext_resource type="FontFile" uid="uid://b284ty7suqywp" path="res://assets/fonts/saira/SairaExtraLight.ttf" id="4_1bvp3"]
@@ -29,6 +30,9 @@ corner_radius_bottom_right = 50
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
+
+[node name="CardDataStorage" type="Node" parent="."]
+script = ExtResource("2_52idc")
 
 [node name="Backdrop" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
@@ -217,4 +221,5 @@ text = "Leave the lobby"
 [connection signal="pressed" from="MainUI/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="HostLobbyUI/VBoxContainer/CopyCodeButton" to="." method="_on_copy_code_button_pressed"]
 [connection signal="pressed" from="HostLobbyUI/VBoxContainer/KickButton" to="." method="_on_kick_button_pressed"]
+[connection signal="pressed" from="HostLobbyUI/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="JoinLobbyUI/VBoxContainer/LeaveButton" to="." method="_on_leave_button_pressed"]

@@ -7,7 +7,6 @@
 [ext_resource type="FontFile" uid="uid://birahchd74q28" path="res://assets/fonts/saira/SairaBlack.ttf" id="5_p71tq"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p71tq"]
-load_path = "res://.godot/imported/placeholder_card.svg-f78101fbe4b6cd480d70ef09b74ae02f.ctex"
 
 [node name="Game" type="Node"]
 script = ExtResource("1_xyldu")
