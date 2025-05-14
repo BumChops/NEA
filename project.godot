@@ -14,7 +14,7 @@ config/name="Solarae"
 run/main_scene="uid://cu1ae01rxtlgm"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0.2, 0.2, 0.2, 1)
-boot_splash/image="uid://da0hwlqb0riek"
+boot_splash/image="uid://brcu1rxlje1s6"
 
 [display]
 
