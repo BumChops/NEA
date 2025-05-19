@@ -31,8 +31,8 @@ var inGame = false
 var joinCode = ""
 # Code is 7-char numbers/letters (excluding I and O) --> IPv4 address
 var hostCode = ""
-var username = ""
-var opName = ""
+@export var username = ""
+@export var opName = ""
 
 var myDeck = []
 const tempDeck = "1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4"
