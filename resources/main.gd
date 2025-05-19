@@ -24,6 +24,7 @@ var packets = []
 var clientUp = false
 var serverUp = false
 var stage = ""
+var inGame = false
 
 #const base34Chars = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ"
 
@@ -38,7 +39,7 @@ const tempDeck = "1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4"
 var turn = 0
 
 func output(data) -> void:
-	print(username + ": " + data)
+	print(username + ": " + str(data))
 
 func _ready():
 	var http = HTTPRequest.new()
@@ -87,16 +88,19 @@ func manageServer():
 				packets.append(socket.get_packet().get_string_from_ascii())
 				output(packets[-1])
 				var packet = packets.pop_back().split(" ", true, 1)
-				match packet[0]:
-					"CONNECTED":
-						opName = packet[1]
-						hostNameDisplay.text = "You are in a lobby with: " + opName
-						output(packet[1])
-						socket.send_text("CONNECTED " + username)
-						stage = "LOBBY WAITING"
-					"DECK_SET":
-						socket.send_text("STARTING")
-						stage = "STARTING"
+				if inGame:
+					get_node("Game").packets.append(packet)
+				else:
+					match packet[0]:
+						"CONNECTED":
+							opName = packet[1]
+							hostNameDisplay.text = "You are in a lobby with: " + opName
+							output(packet[1])
+							socket.send_text("CONNECTED " + username)
+							stage = "LOBBY WAITING"
+						"DECK_SET":
+							socket.send_text("STARTING")
+							stage = "STARTING"
 			
 			match stage:
 				"LOBBY WAITING":
@@ -106,6 +110,7 @@ func manageServer():
 					hostLobbyUI.hide()
 					var gameInstance = game.instantiate()
 					add_child(gameInstance)
+					stage = "IN_GAME"
 		
 	elif clientUp:
 		socket.poll()
@@ -114,25 +119,28 @@ func manageServer():
 				packets.append(socket.get_packet().get_string_from_ascii())
 				output(packets[-1])
 				var packet = packets.pop_back().split(" ", true, 1)
-				match packet[0]:
-					"CONNECTED":
-						opName = packet[1]
-						joinNameDisplay.text = "You are in a lobby with: " + opName
-						stage = "LOBBY WAITING"
-					"FORCE_DECK":
-						myDeck = packet[1].split(",")
-						socket.send_text("DECK_SET")
-						stage = "LOBBY WAITING"
-					"KICKING":
-						output("You have been kicked :(")
-						joinNameDisplay.text = "You have been kicked 😟"
-						stage = "KICKED"
-					"STARTING":
-						joinLobbyUI.hide()
-						var gameInstance = game.instantiate()
-						add_child(gameInstance)
-						socket.send_text("STARTED")
-						stage = "STARTED"
+				if inGame:
+					get_node("Game").packets.append(packet)
+				else:
+					match packet[0]:
+						"CONNECTED":
+							opName = packet[1]
+							joinNameDisplay.text = "You are in a lobby with: " + opName
+							stage = "LOBBY WAITING"
+						"FORCE_DECK":
+							myDeck = packet[1].split(",")
+							socket.send_text("DECK_SET")
+							stage = "LOBBY WAITING"
+						"KICKING":
+							output("You have been kicked :(")
+							joinNameDisplay.text = "You have been kicked 😟"
+							stage = "KICKED"
+						"STARTING":
+							joinLobbyUI.hide()
+							var gameInstance = game.instantiate()
+							add_child(gameInstance)
+							socket.send_text("STARTED")
+							stage = "IN_GAME"
 			
 			match stage:
 				"CONFIRM CONNECTION":
