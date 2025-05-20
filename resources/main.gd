@@ -34,7 +34,7 @@ var hostCode = ""
 @export var username = ""
 @export var opName = ""
 
-var myDeck = []
+var myDeck := []
 const tempDeck = "1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4"
 var turn = 0
 
@@ -89,7 +89,7 @@ func _process(_d):
 						"STARTED":
 							inGame = true
 							socket.send_text("PRE_MATCH no 16 0")
-							get_node("Game").packets.append("PRE_MATCH yes " + str(len(myDeck)) + " 0")
+							get_node("Game").myDeck = myDeck
 							#PRE_MATCH bool4turn numReserve numCReserve
 			match stage:
 				"LOBBY WAITING":
@@ -120,7 +120,7 @@ func _process(_d):
 							joinNameDisplay.text = "You are in a lobby with: " + opName
 							stage = "LOBBY WAITING"
 						"FORCE_DECK":
-							myDeck = packet[1].split(",")
+							myDeck = Array(packet[1].split(","))
 							socket.send_text("DECK_SET")
 							stage = "LOBBY WAITING"
 						"KICKING":
@@ -150,6 +150,7 @@ func checkInputs():
 	if username == "":
 		hostButton.disabled = true
 	else:
+		DisplayServer.window_set_title("Solarae " + username)
 		hostButton.disabled = false
 	if username == "" or joinCode == "":
 		joinButton.disabled = true
@@ -197,4 +198,4 @@ func _on_leave_button_pressed():
 
 func _on_start_button_pressed():
 	socket.send_text("FORCE_DECK " + tempDeck)
-	myDeck = tempDeck.split(",")
+	myDeck = Array(tempDeck.split(","))

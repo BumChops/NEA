@@ -23,7 +23,7 @@ var map = {
 	}
 }
 
-
+var handCard = preload("res://resources/hand_card.tscn")
 
 var packets = []
 var packetsToSend = []
@@ -49,13 +49,14 @@ var myTurn = false
 5.	Some more effects
 """
 
-@onready var myDeck = get_parent().myDeck.shuffle()
+@onready var myDeck = get_parent().myDeck
 
 func output(data) -> void:
 	print(username + ": " + str(data))
 
 func _ready():
 	map["me"]["reserve"] = len(myDeck)
+	myDeck.shuffle()
 	print(username + ": Game in tree")
 
 func updateMapDisplay():
@@ -77,6 +78,17 @@ func updateMapDisplay():
 		opCards.get_node("C-Reserve").texture = cardBackImg
 	else:
 		opCards.get_node("C-Reserve").texture = cardEmptyImg
+	for i in map["me"]["hand"]:
+		var card = handCard.instantiate()
+		card.texture = load("res://assets/cards/"+str(i)+".png")
+		$PlayerCardTiles/HandContainer.add_child(card)
+	for i in map["op"]["hand"]:
+		var card = handCard.instantiate()
+		card.texture = load("res://assets/cards/"+str(i)+".png")
+		$OpCardTiles/HandContainer.add_child(card)
+
+func setPlay(canPlay:bool):
+	pass
 
 func _process(_d):
 	if len(packets) > 0:
@@ -89,6 +101,16 @@ func _process(_d):
 					myTurn = true
 				map["op"]["reserve"] = int(packet[2])
 				map["op"]["c-reserve"] = int(packet[3])
+				packetsToSend.append("DONE_PRE_MATCH " + str(map["me"]["reserve"]) + " " + str(map["me"]["c-reserve"]))
+				for i in range(5):
+					map["me"]["hand"].append(myDeck[0])
+				updateMapDisplay()
+			"DONE_PRE_MATCH":
+				map["op"]["reserve"] = int(packet[1])
+				map["op"]["c-reserve"] = int(packet[2])
+				for i in range(5):
+					map["me"]["hand"].append(myDeck[0])
+				setPlay(myTurn)
 				updateMapDisplay()
 			"TURN":
 				if packet[1] == "YOURS":

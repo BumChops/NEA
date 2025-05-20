@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmvyebcwv8qiq"]
+[gd_scene load_steps=8 format=3 uid="uid://cmvyebcwv8qiq"]
 
 [ext_resource type="Script" uid="uid://85o2t7mrqs3u" path="res://resources/game.gd" id="1_xyldu"]
 [ext_resource type="Script" uid="uid://bx050dyx1g11w" path="res://resources/card_data_storage.gd" id="2_3y73d"]
@@ -7,8 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://c0c16c5ehamn5" path="res://assets/images/empty_slot.png" id="4_3y73d"]
 [ext_resource type="Theme" uid="uid://dcc3ctxvwy8y2" path="res://resources/main.tres" id="4_nqg2l"]
 [ext_resource type="FontFile" uid="uid://birahchd74q28" path="res://assets/fonts/saira/SairaBlack.ttf" id="5_p71tq"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p71tq"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_xyldu")
@@ -111,12 +109,9 @@ rotation = 1.5708
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_3y73d")
 
-[node name="Hand" type="Node2D" parent="PlayerCardTiles"]
-position = Vector2(-880, 0)
-
-[node name="H1" type="Sprite2D" parent="PlayerCardTiles/Hand"]
-scale = Vector2(0.125, 0.125)
-texture = SubResource("CompressedTexture2D_p71tq")
+[node name="HandContainer" type="VBoxContainer" parent="PlayerCardTiles"]
+offset_left = 880.0
+offset_right = 920.0
 
 [node name="OpCardTiles" type="Node2D" parent="."]
 position = Vector2(960, 540)
@@ -209,12 +204,10 @@ rotation = -1.5708
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_3y73d")
 
-[node name="Hand" type="Node2D" parent="OpCardTiles"]
-position = Vector2(880, 0)
-
-[node name="H1" type="Sprite2D" parent="OpCardTiles/Hand"]
-scale = Vector2(0.125, 0.125)
-texture = SubResource("CompressedTexture2D_p71tq")
+[node name="HandContainer" type="VBoxContainer" parent="OpCardTiles"]
+offset_left = 880.0
+offset_right = 920.0
+offset_bottom = 40.0
 
 [node name="CardReader" type="Sprite2D" parent="."]
 visible = false
