@@ -33,6 +33,8 @@ var cardEmptyImg = load("res://assets/images/empty_slot.png")
 
 @onready var meCards = $PlayerCardTiles
 @onready var opCards = $OpCardTiles
+@onready var meHpNode = $GameUI/PlayerHP
+@onready var opHpNode = $GameUI/OpHP
 
 @onready var opName = get_parent().opName
 @onready var username = get_parent().username
@@ -57,6 +59,8 @@ func _ready():
 	print(username + ": Game in tree")
 
 func updateMapDisplay():
+	meHpNode.text = "🟅" + str(map["me"]["hp"]) + "🟅"
+	opHpNode.text = "🟅" + str(map["op"]["hp"]) + "🟅"
 	if map["me"]["reserve"] > 0:
 		meCards.get_node("Reserve").texture = cardBackImg
 	else:
