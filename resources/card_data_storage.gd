@@ -11,7 +11,7 @@ static var cards := {
 	1: {
 		"name": "X400 Patrol Ship",
 		"type": "ship", "tags": [], "rate": 8, "ATK": 10, "DEF": 10,
-		"description": "For when you want to protect your territory whilst also protecting your defence budget.",
+		"description": "The ideal ship to protect your territory whilst also protecting your defence budget.",
 		"effect_txt": ""
 	},
 	2: {

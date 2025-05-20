@@ -47,7 +47,7 @@ var myTurn = false
 5.	Some more effects
 """
 
-@onready var myDeck = get_parent().myDeck
+@onready var myDeck = get_parent().myDeck.shuffle()
 
 func output(data) -> void:
 	print(username + ": " + str(data))

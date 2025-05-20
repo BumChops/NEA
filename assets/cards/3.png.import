@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfd2now2axldm"
-path="res://.godot/imported/Solarae Logo (2).png-66d409b67ef59302a4fda314c6eb9e41.ctex"
+uid="uid://de0rp8n84p70p"
+path="res://.godot/imported/3.png-0b6e5283b93f205d726f9b33a0b157d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/Solarae Logo (2).png"
-dest_files=["res://.godot/imported/Solarae Logo (2).png-66d409b67ef59302a4fda314c6eb9e41.ctex"]
+source_file="res://assets/cards/3.png"
+dest_files=["res://.godot/imported/3.png-0b6e5283b93f205d726f9b33a0b157d2.ctex"]
 
 [params]
 
