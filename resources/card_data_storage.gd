@@ -4,6 +4,10 @@ class_name CardStorage
 
 #Key is their id
 static var cards := {
+	0: {
+		"name": "Face-down card",
+		"type": null
+	},
 	1: {
 		"name": "X400 Patrol Ship",
 		"type": "ship", "tags": [], "rate": 8, "ATK": 10, "DEF": 10,
@@ -29,8 +33,6 @@ static var cards := {
 		"effect_txt": ""
 	},
 }
-
-
 
 #Methods
 static func get_card(id:int) -> Dictionary:

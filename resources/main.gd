@@ -58,24 +58,6 @@ func getMyCode(_r, _c, _h, body):
 	#lobbyCodeDisplay.text = str(ipInt)
 
 func _process(_d):
-	manageServer()
-
-func _exit_tree():
-	socket.close()
-	if serverUp:
-		tcpServer.stop()
-
-func checkInputs():
-	if username == "":
-		hostButton.disabled = true
-	else:
-		hostButton.disabled = false
-	if username == "" or joinCode == "":
-		joinButton.disabled = true
-	else:
-		joinButton.disabled = false
-
-func manageServer():
 	if serverUp:
 		while tcpServer.is_connection_available():
 			var connection = tcpServer.take_connection()
@@ -87,10 +69,13 @@ func manageServer():
 			while socket.get_available_packet_count() != 0:
 				packets.append(socket.get_packet().get_string_from_ascii())
 				output(packets[-1])
-				var packet = packets.pop_back().split(" ", true, 1)
+				var packet = packets.pop_back()
 				if inGame:
 					get_node("Game").packets.append(packet)
+					while len(get_node("Game").packetsToSend) > 0:
+						socket.send_text(get_node("Game").packetsToSend.pop_front())
 				else:
+					packet = packet.split(" ", true, 1)
 					match packet[0]:
 						"CONNECTED":
 							opName = packet[1]
@@ -101,7 +86,11 @@ func manageServer():
 						"DECK_SET":
 							socket.send_text("STARTING")
 							stage = "STARTING"
-			
+						"STARTED":
+							inGame = true
+							socket.send_text("PRE_MATCH no 16 0")
+							get_node("Game").packets.append("PRE_MATCH yes " + str(len(myDeck)) + " 0")
+							#PRE_MATCH bool4turn numReserve numCReserve
 			match stage:
 				"LOBBY WAITING":
 					kickButton.disabled = false
@@ -118,10 +107,13 @@ func manageServer():
 			while socket.get_available_packet_count() != 0:
 				packets.append(socket.get_packet().get_string_from_ascii())
 				output(packets[-1])
-				var packet = packets.pop_back().split(" ", true, 1)
+				var packet = packets.pop_back()
 				if inGame:
 					get_node("Game").packets.append(packet)
+					while len(get_node("Game").packetsToSend) > 0:
+						socket.send_text(get_node("Game").packetsToSend.pop_front())
 				else:
+					packet = packet.split(" ", true, 1)
 					match packet[0]:
 						"CONNECTED":
 							opName = packet[1]
@@ -141,6 +133,7 @@ func manageServer():
 							add_child(gameInstance)
 							socket.send_text("STARTED")
 							stage = "IN_GAME"
+							inGame = true
 			
 			match stage:
 				"CONFIRM CONNECTION":
@@ -148,7 +141,20 @@ func manageServer():
 					socket.send_text("CONNECTED " + username)
 					stage = "NEED PACKET"
 
+func _exit_tree():
+	socket.close()
+	if serverUp:
+		tcpServer.stop()
 
+func checkInputs():
+	if username == "":
+		hostButton.disabled = true
+	else:
+		hostButton.disabled = false
+	if username == "" or joinCode == "":
+		joinButton.disabled = true
+	else:
+		joinButton.disabled = false
 
 func _on_name_entry_text_changed(newName):
 	username = newName
