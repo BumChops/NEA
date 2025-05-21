@@ -3,5 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bt30huai2xe0l" path="res://assets/images/placeholder_card.png" id="1_jgu6v"]
 
 [node name="H1" type="TextureRect"]
-scale = Vector2(0.01, 0.01)
+offset_left = -52.0
+offset_top = -74.0
+offset_right = 998.0
+offset_bottom = 1411.0
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_jgu6v")

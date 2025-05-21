@@ -28,7 +28,7 @@ var handCard = preload("res://resources/hand_card.tscn")
 var packets = []
 var packetsToSend = []
 
-var cardBackImg = load("res://assets/images/card_back.png")
+var cardBackImg = load("res://assets/cards/0.png")
 var cardEmptyImg = load("res://assets/images/empty_slot.png")
 
 @onready var meCards = $PlayerCardTiles
@@ -79,15 +79,17 @@ func updateMapDisplay():
 	else:
 		opCards.get_node("C-Reserve").texture = cardEmptyImg
 	for i in map["me"]["hand"]:
+		#output(i)
 		var card = handCard.instantiate()
 		card.texture = load("res://assets/cards/"+str(i)+".png")
 		$PlayerCardTiles/HandContainer.add_child(card)
 	for i in map["op"]["hand"]:
+		output("op's hand: "+str(i))
 		var card = handCard.instantiate()
-		card.texture = load("res://assets/cards/"+str(i)+".png")
+		card.texture = cardBackImg
 		$OpCardTiles/HandContainer.add_child(card)
 
-func setPlay(canPlay:bool):
+func setPlay(_canPlay:bool):
 	pass
 
 func _process(_d):
@@ -103,14 +105,38 @@ func _process(_d):
 				map["op"]["c-reserve"] = int(packet[3])
 				packetsToSend.append("DONE_PRE_MATCH " + str(map["me"]["reserve"]) + " " + str(map["me"]["c-reserve"]))
 				for i in range(5):
-					map["me"]["hand"].append(myDeck[0])
+					map["me"]["hand"].append(myDeck.pop_front())
 				updateMapDisplay()
 			"DONE_PRE_MATCH":
 				map["op"]["reserve"] = int(packet[1])
 				map["op"]["c-reserve"] = int(packet[2])
 				for i in range(5):
-					map["me"]["hand"].append(myDeck[0])
+					map["me"]["hand"].append(myDeck.pop_front())
+				var handString = ""
+				for i in map["me"]["hand"]:
+					handString += str(i) + ","
+				if len(handString) > 0:
+					handString = handString.substr(0, len(handString)-1)
+				packetsToSend.append("OP_HAND " + handString)
 				setPlay(myTurn)
+				updateMapDisplay()
+			"OP_HAND":
+				for i in packet[1].split(","):
+					map["op"]["hand"].append(int(i))
+				output(map["op"]["hand"])
+				output(map["me"]["hand"])
+				var handString = ""
+				for i in map["me"]["hand"]:
+					handString += str(i) + ","
+				if len(handString) > 0:
+					handString = handString.substr(0, len(handString)-1)
+				packetsToSend.append("OTHER_OP_HAND " + handString)
+				updateMapDisplay()
+			"OTHER_OP_HAND":
+				for i in packet[1].split(","):
+					map["op"]["hand"].append(int(i))
+				output(map["op"]["hand"])
+				output(map["me"]["hand"])
 				updateMapDisplay()
 			"TURN":
 				if packet[1] == "YOURS":

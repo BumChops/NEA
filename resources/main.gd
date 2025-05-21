@@ -66,14 +66,16 @@ func _process(_d):
 		
 		socket.poll()
 		if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
+			if inGame:
+				while len(get_node("Game").packetsToSend) > 0:
+						output(get_node("Game").packetsToSend)
+						socket.send_text(get_node("Game").packetsToSend.pop_front())
 			while socket.get_available_packet_count() != 0:
 				packets.append(socket.get_packet().get_string_from_ascii())
 				output(packets[-1])
 				var packet = packets.pop_back()
 				if inGame:
 					get_node("Game").packets.append(packet)
-					while len(get_node("Game").packetsToSend) > 0:
-						socket.send_text(get_node("Game").packetsToSend.pop_front())
 				else:
 					packet = packet.split(" ", true, 1)
 					match packet[0]:
@@ -104,14 +106,16 @@ func _process(_d):
 	elif clientUp:
 		socket.poll()
 		if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
+			if inGame:
+				while len(get_node("Game").packetsToSend) > 0:
+						output(get_node("Game").packetsToSend)
+						socket.send_text(get_node("Game").packetsToSend.pop_front())
 			while socket.get_available_packet_count() != 0:
 				packets.append(socket.get_packet().get_string_from_ascii())
-				output(packets[-1])
+				#output(packets[-1])
 				var packet = packets.pop_back()
 				if inGame:
 					get_node("Game").packets.append(packet)
-					while len(get_node("Game").packetsToSend) > 0:
-						socket.send_text(get_node("Game").packetsToSend.pop_front())
 				else:
 					packet = packet.split(" ", true, 1)
 					match packet[0]:
@@ -121,6 +125,8 @@ func _process(_d):
 							stage = "LOBBY WAITING"
 						"FORCE_DECK":
 							myDeck = Array(packet[1].split(","))
+							for i in range(len(myDeck)):
+								myDeck[i] = int(myDeck[i])
 							socket.send_text("DECK_SET")
 							stage = "LOBBY WAITING"
 						"KICKING":
@@ -199,3 +205,5 @@ func _on_leave_button_pressed():
 func _on_start_button_pressed():
 	socket.send_text("FORCE_DECK " + tempDeck)
 	myDeck = Array(tempDeck.split(","))
+	for i in range(len(myDeck)):
+		myDeck[i] = int(myDeck[i])
